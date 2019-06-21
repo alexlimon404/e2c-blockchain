@@ -15,7 +15,7 @@ class EtherscanServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('etherscan', function ($app) {
-            return new Etherscan;
+            return new Etherscan($app['config']['etherscan']);
         });
     }
 

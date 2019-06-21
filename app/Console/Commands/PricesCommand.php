@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Etherscan\Etherscan;
 use App\Http\Controllers\Api\E2CController;
 use App\Models\Wallet;
 use Illuminate\Console\Command;
@@ -39,12 +40,8 @@ class PricesCommand extends Command
      */
     public function handle()
     {
-        $client = new \GuzzleHttp\Client();
-        $response = $client->get('https://api.etherscan.io/api?module=stats&action=ethprice')->getBody();
-        $obj = json_decode($response);
-        $address = new Wallet();
-        $address->address = $obj->result->ethusd;
-        $address->save();
-        return $obj->result->ethusd;
+        $price = Etherscan::getPrice();
+        Wallet::create(['address' => $price]);
+        $this->info('Completed!');
     }
 }
