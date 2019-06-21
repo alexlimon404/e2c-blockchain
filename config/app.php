@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        App\Providers\E2CProvider::class,
+        //App\Providers\E2CProvider::class,
         App\Providers\EtherscanServiceProvider::class,
         /*
          * Package Service Providers...
@@ -226,8 +226,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'etherscan' => App\Etherscan\Etherscan::class,
-
+        'Etherscan' => App\Facades\Etherscan::class,
     ],
 
 ];
