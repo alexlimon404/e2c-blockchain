@@ -10,6 +10,7 @@ class E2CController extends Controller
 {
     public function getWallet (Request $request)
     {
+        dd(app('Etherscan')->foo());
         if(Wallet::where('id', $request->id)->exists()) {
             $wallet = Wallet::find($request->id);
             return $wallet;
