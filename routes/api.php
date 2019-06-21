@@ -20,5 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([
     'namespace' => 'Api'
 ], function () {
-    Route::post('wallet', 'E2CController@getWallet');
+    Route::get('wallet/', 'E2CController@getWallet');
     });

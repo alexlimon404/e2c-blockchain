@@ -8,14 +8,14 @@ use App\Http\Controllers\Controller;
 
 class E2CController extends Controller
 {
-    public function getWallet ()
+    public function getWallet (Request $request)
     {
-        $client = new \GuzzleHttp\Client();
-        $response = $client->get('https://api.etherscan.io/api?module=stats&action=ethprice')->getBody();
-        $obj = json_decode($response);
-        $address = new Wallet();
-        $address->address = $obj->result->ethusd;
-        $address->save();
-        return $obj->result->ethusd;
+        if(Wallet::where('id', $request->id)->exists()) {
+            $wallet = Wallet::find($request->id);
+            return $wallet;
+        }
+        return response(array(
+            'message' => 'такого кошелька не существует',
+        ), 404);
     }
 }

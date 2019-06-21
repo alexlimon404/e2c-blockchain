@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\E2CController;
 use App\Models\Wallet;
 use Illuminate\Console\Command;
 
-class PriceCommand extends Command
+class PricesCommand extends Command
 {
     /**
      * The name and signature of the console command.
