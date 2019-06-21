@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call('\App\Http\Controllers\Api\E2CController@getWallet')->everyMinute();
+        $schedule->command('prices')->everyMinute();
     }
 
     /**
