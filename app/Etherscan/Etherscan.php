@@ -14,7 +14,7 @@ class Etherscan
 
     public function getConfig(string $key)
     {
-        return $this->config['key'];
+        return $this->config['timeout'];
     }
 
     protected function client()
@@ -22,10 +22,9 @@ class Etherscan
         return new \GuzzleHttp\Client(['timeout' => $this->getConfig('timeout')]);
     }
 
-    public static function getPrice()
+    public function getPrice()
     {
-        $client = new \GuzzleHttp\Client();
-        $response = $client->get('https://api.etherscan.io/api?module=stats&action=ethprice')->getBody();
+        $response = $this->client()->get('https://api.etherscan.io/api?module=stats&action=ethprice')->getBody();
         $obj = json_decode($response);
         return $obj->result->ethusd;
     }

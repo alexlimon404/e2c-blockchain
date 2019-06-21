@@ -40,7 +40,7 @@ class PricesCommand extends Command
      */
     public function handle()
     {
-        $price = Etherscan::getPrice();
+        $price = app('etherscan')->getPrice();
         Wallet::create(['address' => $price]);
         $this->info('Completed!');
     }
