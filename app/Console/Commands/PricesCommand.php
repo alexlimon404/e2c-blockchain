@@ -3,9 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\Api\E2CController;
+use App\Models\Wallet;
 use Illuminate\Console\Command;
 
-class GetPrice extends Command
+class PriceCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -36,9 +37,14 @@ class GetPrice extends Command
      *
      * @return mixed
      */
-    public function handle(E2CController $price)
+    public function handle()
     {
-        return $price->getWallet();
-
+        $client = new \GuzzleHttp\Client();
+        $response = $client->get('https://api.etherscan.io/api?module=stats&action=ethprice')->getBody();
+        $obj = json_decode($response);
+        $address = new Wallet();
+        $address->address = $obj->result->ethusd;
+        $address->save();
+        return $obj->result->ethusd;
     }
 }
